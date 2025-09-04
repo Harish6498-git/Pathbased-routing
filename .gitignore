@@ -1,0 +1,20 @@
+# OS / editors
+.DS_Store
+.vscode/
+.idea/
+
+# archives / keys
+*.zip
+*.pem
+
+# docker/k8s
+*.log
+.kube/
+.minikube/
+.aws/
+.azure/
+
+# node/python build caches (if you add tooling later)
+node_modules/
+__pycache__/
+
