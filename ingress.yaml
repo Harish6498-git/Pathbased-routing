@@ -4,25 +4,40 @@ metadata:
   name: path-router
   annotations:
     kubernetes.io/ingress.class: nginx
-    # If using cert-manager later, add:
-    # cert-manager.io/cluster-issuer: letsencrypt
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: "/$2"
 spec:
-  # tls:
-  # - hosts: [your.domain.com]
-  #   secretName: tls-your-domain
   rules:
-  - # host: your.domain.com  # add when you have DNS; omit for test by IP
-    http:
+  - http:
       paths:
-      - path: /
-        pathType: Prefix
-        backend: { service: { name: web-landing, port: { number: 80 } } }
-      - path: /aws
-        pathType: Prefix
-        backend: { service: { name: web-aws, port: { number: 80 } } }
-      - path: /azure
-        pathType: Prefix
-        backend: { service: { name: web-azure, port: { number: 80 } } }
-      - path: /gcp
-        pathType: Prefix
-        backend: { service: { name: web-gcp, port: { number: 80 } } }
+      # Landing page – serve "/" as-is
+      - path: /$
+        pathType: Exact
+        backend:
+          service:
+            name: web-landing
+            port:
+              number: 80
+      # Strip "/aws" and pass the remainder to web-aws
+      - path: ^/aws(/|$)(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: web-aws
+            port:
+              number: 80
+      - path: ^/azure(/|$)(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: web-azure
+            port:
+              number: 80
+      - path: ^/gcp(/|$)(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: web-gcp
+            port:
+              number: 80
+
