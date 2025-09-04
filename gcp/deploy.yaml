@@ -10,7 +10,7 @@ spec:
     spec:
       containers:
       - name: web-landing
-        image: docker.io/harish0604/pathrouter-gcp:v1
+        image: docker.io/harish0604/pathrouter-gcp:v2
         ports: [{ containerPort: 80 }]
         resources:
           requests: { cpu: "50m", memory: "64Mi" }

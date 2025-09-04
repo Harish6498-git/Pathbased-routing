@@ -2,42 +2,43 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: path-router
+  namespace: pathrouter
   annotations:
+    # If you use NGINX Ingress, leave as nginx
     kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/use-regex: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: "/$2"
+    # If you use AWS ALB controller instead, use:
+    # kubernetes.io/ingress.class: alb
 spec:
   rules:
   - http:
       paths:
-      # Landing page – serve "/" as-is
-      - path: /$
-        pathType: Exact
+      - path: /
+        pathType: Prefix
         backend:
           service:
             name: web-landing
             port:
               number: 80
-      # Strip "/aws" and pass the remainder to web-aws
-      - path: ^/aws(/|$)(.*)
-        pathType: ImplementationSpecific
+      - path: /aws
+        pathType: Prefix
         backend:
           service:
             name: web-aws
             port:
               number: 80
-      - path: ^/azure(/|$)(.*)
-        pathType: ImplementationSpecific
+      - path: /azure
+        pathType: Prefix
         backend:
           service:
             name: web-azure
             port:
               number: 80
-      - path: ^/gcp(/|$)(.*)
-        pathType: ImplementationSpecific
+      - path: /gcp
+        pathType: Prefix
         backend:
           service:
             name: web-gcp
             port:
               number: 80
+
 
