@@ -1,0 +1,10 @@
+resources:
+  - aws/deploy.yaml
+  - aws/svc.yaml
+  - azure/deploy.yaml
+  - azure/svc.yaml
+  - gcp/deploy.yaml
+  - gcp/svc.yaml
+  - deploy.yaml
+  - svc.yaml
+  - ingress.yaml
