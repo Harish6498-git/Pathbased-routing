@@ -9,7 +9,7 @@ spec:
     metadata: { labels: { app: web-gcp } }
     spec:
       containers:
-      - name: web-landing
+      - name: web-gcp
         image: docker.io/harish0604/pathrouter-gcp:v3
         ports: [{ containerPort: 80 }]
         resources:

@@ -9,7 +9,7 @@ spec:
     metadata: { labels: { app: web-aws } }
     spec:
       containers:
-      - name: web-landing
+      - name: web-aws
         image: docker.io/harish0604/pathrouter-aws:v3
         ports: [{ containerPort: 80 }]
         resources:

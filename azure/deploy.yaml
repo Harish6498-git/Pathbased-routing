@@ -9,7 +9,7 @@ spec:
     metadata: { labels: { app: web-azure } }
     spec:
       containers:
-      - name: web-landing
+      - name: web-azure
         image: docker.io/harish0604/pathrouter-azure:v4
         ports: [{ containerPort: 80 }]
         resources:
