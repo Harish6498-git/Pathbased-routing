@@ -10,7 +10,7 @@ spec:
     spec:
       containers:
       - name: web-landing
-        image: docker.io/harish0604/pathrouter-aws:latest
+        image: docker.io/harish0604/pathrouter-aws:v1
         ports: [{ containerPort: 80 }]
         resources:
           requests: { cpu: "50m", memory: "64Mi" }
